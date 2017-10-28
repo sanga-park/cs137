@@ -4,6 +4,10 @@
 using namespace std;
 
 // would it be really good if we have the default constructor? 
+
+Course::Course()
+{
+}
 Course::Course(string csNum, string csName, string mtDays, double unt, Date stDate, Date enDate, Time stTime, Time enTime)
 	  :courseNum(csNum), courseName(csName), meetDays(mtDays), unit(unt), startDate(stDate), endDate(enDate), startTime(stTime), endTime(enTime)
 {
