@@ -5,7 +5,7 @@
 #include "Semester.h"
 using namespace std;
 
-enum DateStatus { clear = 5, startD = 1, endD = 4, both = 2};
+enum DateStatus { clear = 5, startD = 3, endD = 4, both = 2};
 
 class CourseSchedule
 {
