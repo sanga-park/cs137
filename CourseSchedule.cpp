@@ -41,7 +41,7 @@ int CourseSchedule::checkDates(Semester sem, Date sDate, Date eDate)
 
 	// start  end       o:within 
 	//  o      o  --5 -->clear
-	//  x      o  --1 -->startD
+	//  x      o  --3 -->startD
 	//  o      x  --4 -->endD
 	//  x      x  --2 -->both
 	sCnt = ((sem.getSemStartDate < sDate) ? 4 : 2);
