@@ -55,7 +55,8 @@ void CourseSchedule::addCourse(Course& cs, Semester sem, Date sDate, Date eDate)
 	//allow adding a course only when the dates are within the semester duration
 	if (checkDates(sem, sDate, eDate)  == clear)
 	{
-		Courses[CourseSchedule::numCourses] = cs;
+		Courses[numCourses] = cs;
+		numCourses++;
 	}
 }
 
