@@ -2,7 +2,7 @@
 
 CourseSchedule::CourseSchedule(string studentName, Semester semest, int num) : sname(studentName), smester(semest), maxSize(num)
 {
-	numCourses = 0;
+	CourseSchedule::numCourses = 0;
 	Courses = new Course[maxSize];
 }
 
@@ -23,7 +23,7 @@ Semester CourseSchedule::getSemester() const
 
 int CourseSchedule::getnumCourse() const
 {
-	return numCourses;
+	return CourseSchedule::numCourses;
 }
 
 void CourseSchedule::setStudentName(string sn)
@@ -55,7 +55,7 @@ void CourseSchedule::addCourse(Course& cs, Semester sem, Date sDate, Date eDate)
 	//allow adding a course only when the dates are within the semester duration
 	if (checkDates(sem, sDate, eDate)  == clear)
 	{
-		Courses[numCourses] = cs;
+		Courses[CourseSchedule::numCourses] = cs;
 	}
 }
 
@@ -63,11 +63,11 @@ ostream &operator<<(ostream & output, const CourseSchedule & sched)
 {
 	output << "CLASS SCHEDULE\n" << "-----------------------\n" << "Name: " << sched.sname
 		<< endl << "Semester: " << sched.smester
-		<< endl << "Number of Classes: " << sched.numCourses
+		<< endl << "Number of Classes: " << sched.CourseSchedule::numCourses
 		<< "-----------------------------------------\n";
 		
 		// course description imported from course.cpp ostream operator
-	for (int i = 0; i < sched.numCourses; i++)
+	for (int i = 0; i < sched.CourseSchedule::numCourses; i++)
 	{
 		output << sched.Courses[i] << endl << endl;
 	}
