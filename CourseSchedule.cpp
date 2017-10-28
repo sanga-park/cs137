@@ -61,25 +61,14 @@ int CourseSchedule::checkDates(Semester sem, Date sDate, Date eDate)
 
 void CourseSchedule::addCourse(Course& cs, Semester sem, Date sDate, Date eDate)
 {
-	//prompt the user input 
-	int sel=maxSize+1; //initialize so that it doesn't accidentally delete unintended course 
-	cout << "Enter the order of the course that you would like to delete. " << endl; //It's kinda crude but it's a simplest way that I can think of.
-	cin >> sel;
-	//check validation 
-	while (sel >= maxSize || sel < 0)
-	{
-		cout << "Invalid input! Please enter the proper order: " << endl;
-		cin >> sel;
-	}
-
 	//allow adding a course only when the dates are within the semester duration
 	if (checkDates(sem, sDate, eDate) == 5)
 	{
-		cs[sel]
+		// I think we need to call cinput such like cin >> cs[number];
 	}
 }
 
-void CourseSchedule::removeCourse()
+void CourseSchedule::removeCourse(Course* cs)
 {
 	int sel = maxSize + 1; //initialize so that it doesn't accidentally delete unintended course 
 	int cnt = sel - 1;
@@ -94,25 +83,14 @@ void CourseSchedule::removeCourse()
 		cin >> sel;
 	}
 
-	/*
-		string courseNum;
-		string courseName;
-		string meetDays;
-		double unit;
-		Date startDate;
-		Date endDate;
-		Time startTime;
-		Time endTime;
-		*/
-	//remove information of selected element in the array  
-
-	Courses[cnt].getCourseName() = nullptr;
-
+	// call remove function in Course class
+	// I don't know if it will delete only one element or not -- we need to check 
+	cs[sel].remove(cs);
 
 	//move all the other information of elements one to left 
 	for (int i = sel; i < maxSize; i++)
 	{
-		Courses[i - 1].courseName = Courses[i].courseName; //can't use memberwise function ... 
+		cs[sel].replace(cs, sel);
 	}
 
 	// we should search how to remove the element of the arry that is already declared.

@@ -3,11 +3,6 @@
 #include "Course.h"
 using namespace std;
 
-// would it be really good if we have the default constructor? 
-
-Course::Course()
-{
-}
 Course::Course(string csNum, string csName, string mtDays, double unt, Date stDate, Date enDate, Time stTime, Time enTime)
 	  :courseNum(csNum), courseName(csName), meetDays(mtDays), unit(unt), startDate(stDate), endDate(enDate), startTime(stTime), endTime(enTime)
 {
@@ -80,6 +75,20 @@ Course& Course::setMeetDays(string& meets)
 	return *this;
 }
 
+//remove function 
+
+void Course::remove(Course* cs)
+{
+	Course* defaultCourse; //initialized 
+	cs = defaultCourse;
+
+}
+
+void Course::replace(Course* cs, int sel)
+{
+	cs[sel - 1].courseNum = cs[sel].courseNum;
+	//and so on...
+}
 //////////////////////////////////////////// iostream operators
 ostream &operator << (ostream &output, const Course& course)//, const Date& date, const Time& time) //ohh!!
 {
@@ -92,6 +101,11 @@ ostream &operator << (ostream &output, const Course& course)//, const Date& date
 		<< "Daily Duration: " << course.getEndTime() - course.getStartTime() << endl;
 	return output;
 }
+
+
+
+
+
 
 /* DON'T NEED THIS PART, I'm just saving it in case and check if it still works (out of curiousity) 
 istream &operator >> (istream &input, Course& course)

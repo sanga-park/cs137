@@ -14,8 +14,8 @@ class CourseSchedule
 private:
 	static int numCourses;
 	int maxSize;
-	Course courseList[maxSize];
-	Course* ptrCourse;
+	Course* Courses;
+	Course list; //test
 	//course(string, string, string, double, Date, Date, Time, Time);
 
 	string sname; // student name
@@ -32,7 +32,7 @@ public:
 	int getnumCourse() const;
 	void setStudentName(string);
 	void addCourse(Course&, Semester, Date, Date);
-	void removeCourse();
+	void removeCourse(Course*);
 };
 
 #endif COURSESHEDULE_H

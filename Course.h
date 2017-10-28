@@ -6,8 +6,6 @@
 #include "Date.h"
 using namespace std;
 
-// note to myself:  the files are not in the same folder as project1 is.  Make sure to move them later 
-
 class Course
 {
 	friend ostream &operator<<(ostream &, const Course &);
@@ -23,8 +21,8 @@ class Course
 		Time endTime;
 
 	public:
-		Course();
-		Course(string, string, string, double, Date, Date, Time, Time);
+		//by adding member initializers we don't need the default constructor 
+		Course(string ="", string ="", string ="", double =0.0, Date =(0,0,0), Date =(0,0,0), Time =(0,0,0), Time=(0,0,0));
 		~Course();
 		string getCourseNum() const;
 		string getCourseName() const;
@@ -34,6 +32,9 @@ class Course
 		Date getEndDate() const;
 		Time getStartTime() const;
 		Time getEndTime() const;
+
+		void remove(Course*); //test
+		void replace(Course*, int); //test
 
 		Course& setCourseNum(string&);
 		Course& setCourseName(string&);
