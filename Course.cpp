@@ -39,7 +39,6 @@ double Course::getUnit() const
 
 Date Course::getStartDate() const
 {
-	//should I apply checkDay function here?
 	return startDate;
 }
 
@@ -57,7 +56,6 @@ Time Course::getEndTime() const
 {
 	return endTime;
 }
-
 
 ///////////////////////////////////////////set functions
 Course& Course::setCourseNum(string& csNum)
@@ -81,21 +79,13 @@ Course& Course::setMeetDays(string& meets)
 //////////////////////////////////////////// iostream operators
 ostream &operator << (ostream &output, const Course& course)//, const Date& date, const Time& time) //ohh!!
 {
-	/*
-	Course Info: CSIS 112 -- Java
-# of Units: 3.00
-Course Dates: 09/06/2017 – 12/18/2017
-Meeting Days: T
-Meeting Time: 6:55PM - 10:05PM
-Daily Duration: 1.42 hours
-*/
 	output << "Course Info: " << course.courseNum << " -- " << course.courseName << endl
-		<< "# of Units: " << setprecision(2) <<setfill('0') << course.unit << endl //how to make it work in 0.00 format
+		<< "Number of Units: " << setprecision(2) <<setfill('0') << course.unit << endl //how to make it work in 0.00 format
 		<< "Course Dates: " << course.startDate << " - " << course.endDate << endl 
 		<< "Meeting Days: " << course.meetDays << endl
-		//<< "Meeting Time: " << course.startTime << " - " << course.endTime << endl 
-		//^ the error occurs bc there's no << operator in Time.h
-		<< "Daily Duration: " << endl;
+		<< "Meeting Time: " << course.startTime << " - " << course.endTime << endl 
+		// to use Time - operator, the variables shouldn't be private -- reason why using get functions only in here. 
+		<< "Daily Duration: " << course.getEndTime() - course.getStartTime() << endl;
 	return output;
 }
 

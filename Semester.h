@@ -21,7 +21,7 @@ class Semester
 		~Semester();
 
 		Semester& setSemesterName(string&);
-		Semester& setSemStartDate(Date&);//has to be semester start date 
+		Semester& setSemStartDate(Date&);
 		Semester& setSemEndDate(Date&);
 		string getSemesterName() const;
 		Date getSemStartDate() const;

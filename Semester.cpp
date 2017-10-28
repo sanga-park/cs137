@@ -3,7 +3,7 @@
 #include "Semester.h"
 using namespace std;
 
-Semester::Semester(string semName, Date stDate, Date enDate) //:semesterName(semName), startDate(stDate), endDate(enDate)
+Semester::Semester(string semName, Date stDate, Date enDate)
 {
 	setSemesterName(semName);
 	setSemStartDate(stDate);

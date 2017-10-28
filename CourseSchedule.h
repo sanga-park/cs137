@@ -3,30 +3,35 @@
 #include <string>
 #include <iostream>
 #include "Semester.h"
-#include "Date.h"
 using namespace std;
+
+enum DateStatus { clear = 5, startD = 1, endD = 4, both = 2};
 
 class CourseSchedule
 {
-private:
-	static int numCourses;
-	Course* Courses;
-	Course(string, string, string, double, Date, Date, Time, Time);
+	friend ostream &operator<<(ostream &, const CourseSchedule &);
 
-	int maxSize;
-	string sname; // student name
-	Semester smester;
-	Date startDate;
-	Date endDate;
-	void checkDates(Semester, Date, Date);      //How do we call course private member variables?
+	private:
+		static int numCourses;
+		int maxSize;
+		Course* Courses;
+		//course(string, string, string, double, Date, Date, Time, Time);
+		//I don't think we need additional course data type as private member. 
 
-public:
-	CourseSchedule(string, Semester, int);
-	~CourseSchedule();
-	string getStudentName() const;
-	Semester getSemester() const;
-	int getnumCourse() const;
-	void setStudentName(string);
+		string sname; // student name
+		Semester smester;
+		Date startDate;
+		Date endDate;
+		int checkDates(Semester, Date, Date);      //How do we call course private member variables?
+
+	public:
+		CourseSchedule(string, Semester, int);
+		~CourseSchedule();
+		string getStudentName() const;
+		Semester getSemester() const;
+		int getnumCourse() const;
+		void setStudentName(string);
+		void addCourse(Course&, Semester, Date, Date);
 };
 
 #endif COURSESHEDULE_H
