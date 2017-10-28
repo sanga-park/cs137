@@ -4,7 +4,7 @@
 #include "CourseSchedule.h"
 using namespace std;
 
-void FirstScene();
+void FirstScene(Semester);
 
 int main()
 {
@@ -35,7 +35,7 @@ int main()
 
 	do
 	{
-		FirstScene();
+		FirstScene(sem);
 		cin >> sel;
 
 		if (sel == '1')
@@ -72,7 +72,7 @@ int main()
 
 }
 
-void FirstScene()
+void FirstScene(Semester sem)
 {
 	cout << "COURSE ENTRY MENU FOR: " << setw(11) << sem.getSemesterName << " (" << sem.getStartDate << "-" << sem.getEndDate << ")" << endl;
 	cout << "----------------------------------------------------------------" << endl;
