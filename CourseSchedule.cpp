@@ -3,14 +3,7 @@
 CourseSchedule::CourseSchedule(string studentName, Semester semest, int num) : sname(studentName), smester(semest), maxSize(num)
 {
 	CourseSchedule::numCourses = 0;
-	Courses = new Course[maxSize]; 
-	//a pointer to Course that has array elements 
-
-	//if it doesn't work considering using for loop and initialize individual elements 
-	for (int i = 0; i < maxSize; i++)
-	{
-		Courses[i] = nullptr;
-	}
+	Courses = new Course[maxSize];
 }
 
 CourseSchedule::~CourseSchedule()
@@ -40,7 +33,6 @@ void CourseSchedule::setStudentName(string sn)
 	sname = sn;
 }
 
-
 // utility function 
 int CourseSchedule::checkDates(Semester sem, Date sDate, Date eDate)
 {
@@ -64,14 +56,16 @@ void CourseSchedule::addCourse(Course& cs, Semester sem, Date sDate, Date eDate)
 	//allow adding a course only when the dates are within the semester duration
 	if (checkDates(sem, sDate, eDate) == 5)
 	{
-		// I think we need to call cinput such like cin >> cs[number];
+		// but it says we have to use a memberwise function
+		*(Courses + numCourses) = cs;
+		// and this should work
 	}
+	numCourses++;
 }
 
 void CourseSchedule::removeCourse(Course* cs)
 {
 	int sel = maxSize + 1; //initialize so that it doesn't accidentally delete unintended course 
-	int cnt = sel - 1;
 
 	//prompt the user input 
 	cout << "Enter the order of the course that you would like to delete. " << endl; //It's kinda crude but it's a simplest way that I can think of.
@@ -83,14 +77,16 @@ void CourseSchedule::removeCourse(Course* cs)
 		cin >> sel;
 	}
 
+	int cnt = sel - 1;
+
 	// call remove function in Course class
 	// I don't know if it will delete only one element or not -- we need to check 
-	cs[sel].remove(cs);
+	cs[cnt].remove(cs);
 
 	//move all the other information of elements one to left 
-	for (int i = sel; i < maxSize; i++)
+	for (int i = cnt; i < maxSize; i++)
 	{
-		cs[sel].replace(cs, sel);
+		cs[cnt].replace(cs, cnt+1);				// since we are replacing the value of cnt to that of cnt+1 so I changed it.
 	}
 
 	// we should search how to remove the element of the arry that is already declared.
