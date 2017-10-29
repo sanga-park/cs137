@@ -95,7 +95,7 @@ int main()
 
 void FirstScene(Semester sem)
 {
-	cout << "COURSE ENTRY MENU FOR: " << setw(11) << sem.getSemesterName() << " (" << sem.getSemStartDate() << "-" << sem.getSemEndDate() << ")" << endl;
+	cout << "COURSE ENTRY MENU FOR: " << setw(11) << sem.getSemesterName << " (" << sem.getSemStartDate << "-" << sem.getSemEndDate << ")" << endl;
 	cout << "----------------------------------------------------------------" << endl;
 	cout << "1) Enter a new course" << endl;
 	cout << "2) Remove a course" << endl;
