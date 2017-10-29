@@ -3,33 +3,32 @@
 #include "Semester.h"
 using namespace std;
 
-Semester::Semester(string semName, Date stDate, Date enDate)
+Semester::Semester(string semName, Date stDate, Date enDate) : semesterName(semName), semStartDate(stDate), semEndDate(enDate)
 {
-	setSemesterName(semName);
-	setSemStartDate(stDate);
-	setSemEndDate(stDate);
 }
 
 Semester::~Semester()
 {
-	cout << "The semester has been reset." << endl;
+	cout << "The destructor for semester class has been called." << endl;
 }
 
 Semester& Semester::setSemesterName(string& semName)
 {
-	semesterName == (semName != "" ? semesterName : "Default");
+	semesterName = (semName != "" ? semName : "Default");
 	return *this;
 }
 
 Semester& Semester::setSemStartDate(Date& stDate)
 {
-	semStartDate == (stDate != Date(0, 0, 0) ? semStartDate : Date(0, 0, 0));
+	//since the validation for date is done when date instance was created -- don't need to verify again here
+	//memberwise assignment applied here --see if there's any problem 
+	semStartDate = stDate;
 	return *this;
 }
 
 Semester& Semester::setSemEndDate(Date& enDate)
 {
-	semEndDate == (enDate != Date(0, 0, 0) ? semEndDate : Date(0, 0, 0));
+	semEndDate = enDate;
 	return *this;
 }
 
@@ -50,8 +49,8 @@ Date Semester::getSemEndDate() const
 
 ostream &operator<<(ostream& output, const Semester &sem)
 {
-	//Semester: Fall 2017 (00/00/0000-00/00/0000)
-	output << "Semester: " << sem.semesterName << " (" << sem.semStartDate << "-" << sem.semEndDate << ") " << endl;
+	//Fall 2017 (mm/dd/yyyy-mm/dd/yyyy) format
+	output << sem.semesterName << " (" << sem.semStartDate << "-" << sem.semEndDate << ") " << endl;
 	return output;
 }
 

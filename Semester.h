@@ -19,7 +19,7 @@ class Semester
 	public:
 		Semester(string, Date, Date);
 		~Semester();
-
+		
 		Semester& setSemesterName(string&);
 		Semester& setSemStartDate(Date&);
 		Semester& setSemEndDate(Date&);

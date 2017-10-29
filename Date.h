@@ -22,8 +22,9 @@ class Date
                 int checkDay(int) const;
 
         public:
-               Date(int = 1, int = 1, int = 1990);
+               Date(int = 1, int = 1, int = 2017);
                ~Date();
+			   //Date(const Date&); //copy constructor -> memberwise assignment 
 			   Date& setDate(int, int, int);
 
 			   //add get/set member variable functions
@@ -34,6 +35,7 @@ class Date
 			   int getDay() const;
 			   int getYear() const;
 
+			   void operator= (const Date &);
 			   bool operator>(const Date&) const;
 			   bool operator<(const Date&) const;
 			   bool operator==(const Date&) const;

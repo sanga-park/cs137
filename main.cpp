@@ -22,19 +22,16 @@ int main()
 	int numOfUnits;
 
 	cout << "What's your name?" << endl;
-	cin >> name;
+	getline(cin,name);
 	cout << "What semester?" << endl;
 	cin >> semesterName;
 	cin.ignore(); //have to put this after string
 	cout << "Starting date?" << endl;
 	cin >> startDate;
-	cin.ignore();
 	cout << "Ending date?" << endl;
 	cin >> endDate;
-	cin.ignore();
 	cout << "Maximum number of classes?" << endl;
 	cin >> maxNum;
-	cin.ignore();
 
 	Semester sem(semesterName, startDate, endDate);
 	CourseSchedule schedule(name, sem, maxNum);

@@ -11,7 +11,7 @@ Course::Course(string csNum, string csName, string mtDays, double unt, Date stDa
 //destructor
 Course::~Course()
 {
-	cout << "The course has been deleted. " << endl;
+	cout << "The destructor for course class has been called." << endl;
 }
 
 
@@ -59,27 +59,57 @@ Time Course::getEndTime() const
 ///////////////////////////////////////////set functions
 Course& Course::setCourseNum(string& csNum)
 {
-	courseNum == (csNum != "" ? courseNum : "Course Number");
+	courseNum = (csNum != "" ? csNum : "Course Number");
 	return *this;
 }
 
 Course& Course::setCourseName(string& csName)
 {
-	courseName == (csName != "" ? courseName : "Course Name");
+	courseName = (csName != "" ? csName : "Course Name");
 	return *this;
 }
 
 Course& Course::setMeetDays(string& meets)
 {
-	meetDays == (meets != "" ? meetDays : "MTWTF");
+	meetDays = (meets != "" ? meets : "MTWTF");
 	return *this;
 }
 
-//remove function 
+void Course::setUnit(double unt)
+{
+	unit = (unt >= 0 ? unt : 0);
+}
 
+Course& Course::setStartDate(Date& stDate)
+{
+	startDate = stDate;
+	return *this;
+}
+
+Course& Course::setEndDate(Date& enDate)
+{
+	endDate = enDate;
+	return *this;
+}
+
+Course& Course::setStartTime(Time& stTime)
+{
+	startTime = stTime;
+	return *this;
+}
+
+Course& Course::setEndTime(Time& enTime)
+{
+	endTime = enTime;
+	return *this;
+}
+
+
+
+//remove & replace function 
 void Course::remove(Course* cs)
 {
-	Course* defaultCourse = nullptr; //initialized 
+	Course* defaultCourse = nullptr; //initialized
 	cs = defaultCourse;
 
 }
@@ -89,6 +119,21 @@ void Course::replace(Course* cs, int sel)
 	cs[sel - 1].courseNum = cs[sel].courseNum;
 	//and so on...
 }
+
+void Course::operator= (const Course& right) //this will be copied to Courses
+{
+	courseNum = right.courseNum;
+	courseName = right.courseName;
+	meetDays = right.meetDays;
+	unit = right.unit;
+	startDate = right.startDate;
+	endDate = right.endDate;
+	startTime = right.startTime;
+	endTime = right.endTime;
+}
+
+
+
 //////////////////////////////////////////// iostream operators
 ostream &operator << (ostream &output, const Course& course)//, const Date& date, const Time& time) //ohh!!
 {

@@ -39,6 +39,13 @@ class Course
 		Course& setCourseNum(string&);
 		Course& setCourseName(string&);
 		Course& setMeetDays(string&);
+		void setUnit(double);
+		Course& setStartDate(Date&);
+		Course& setEndDate(Date&);
+		Course& setStartTime(Time&);
+		Course& setEndTime(Time&);
+
+		void operator= (const Course& cs);
 };
 
 #endif

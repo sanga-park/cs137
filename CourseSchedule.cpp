@@ -54,33 +54,37 @@ int CourseSchedule::checkDates(Semester sem, Date sDate, Date eDate)
 	return sCnt + eCnt;
 }
 
-void CourseSchedule::addCourse(Course& cs, Semester sem, Date sDate, Date eDate)
+void CourseSchedule::addCourse(Course& cou, Semester sem, Date sDate, Date eDate)
 {
 	//allow adding a course only when the dates are within the semester duration
 	if (checkDates(sem, sDate, eDate) == 5)
 	{
-		// I think we need to call cinput such like cin >> cs[number];
+		cou = Courses[CourseSchedule::numCourses];
+		CourseSchedule::numCourses++;
 	}
 }
 
 void CourseSchedule::removeCourse(Course* cs)
 {
 	int sel = maxSize + 1; //initialize so that it doesn't accidentally delete unintended course 
-	int cnt = sel - 1;
+	int cnt = sel - 1; //same as maxSize
 
 	//prompt the user input 
-	cout << "Enter the order of the course that you would like to delete. " << endl; //It's kinda crude but it's a simplest way that I can think of.
+	cout << "Enter the order number of the course that you would like to delete. " << endl;
 	cin >> sel;
 	//check validation 
 	while (sel >= maxSize || sel < 0)
 	{
-		cout << "Invalid input! Please enter the proper order: " << endl;
+		cout << "Invalid input! Please enter the proper order number: " << endl;
 		cin >> sel;
 	}
 
 	// call remove function in Course class
 	// I don't know if it will delete only one element or not -- we need to check 
 	cs[sel].remove(cs);
+
+	//count 
+	CourseSchedule::numCourses--;
 
 	//move all the other information of elements one to left 
 	for (int i = sel; i < maxSize; i++)

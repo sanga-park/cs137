@@ -1,7 +1,6 @@
 #include <iostream>
 #include <iomanip>
 using namespace std;
-
 #include "Date.h"
 
 //constructor validates month and calls utility function to validate day
@@ -13,6 +12,7 @@ Date::Date(int mn, int dy, int yr)
 //destructor
 Date::~Date()
 {
+	cout << "The destructor for date class has been called." << endl;
 }
 
 // get/set functions - cascading allowed by *this 
@@ -26,7 +26,7 @@ Date& Date::setDate(int mn, int dy, int yr)
 
 Date& Date::setMonth(int mn)
 {
-	month = (mn >= 1 && mn <= 31) ? mn : 1;
+	month = (mn >= 1 && mn <= 12) ? mn : 1;
 	return *this;
 }
 
@@ -38,7 +38,7 @@ Date& Date::setDay(int dy)
 
 Date& Date::setYear(int yr)
 {
-	year = (yr >= 2001 && yr <= 2999) ? yr : 2017;
+	year = (yr >= 2001 && yr <= 2099) ? yr : 2017;
 	return *this;
 }
 
@@ -121,6 +121,13 @@ bool Date::operator > (const Date &right) const
 		}
 	}
 	return status;
+}
+
+void Date::operator = (const Date &right) //wouldn't be const
+{
+	month = right.month;
+	day = right.day;
+	year = right.year;
 }
 
 bool Date::operator < (const Date &right) const
