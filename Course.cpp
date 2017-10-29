@@ -79,7 +79,7 @@ Course& Course::setMeetDays(string& meets)
 
 void Course::remove(Course* cs)
 {
-	Course* defaultCourse; //initialized 
+	Course* defaultCourse = nullptr; //initialized 
 	cs = defaultCourse;
 
 }

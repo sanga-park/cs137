@@ -1,9 +1,11 @@
 #include "CourseSchedule.h"
 
+int CourseSchedule::numCourses;
+
 CourseSchedule::CourseSchedule(string studentName, Semester semest, int num) : sname(studentName), smester(semest), maxSize(num)
 {
 	CourseSchedule::numCourses = 0;
-	Courses = new Course[maxSize];
+	Courses = new Course[maxSize]; 
 }
 
 CourseSchedule::~CourseSchedule()
@@ -33,6 +35,7 @@ void CourseSchedule::setStudentName(string sn)
 	sname = sn;
 }
 
+
 // utility function 
 int CourseSchedule::checkDates(Semester sem, Date sDate, Date eDate)
 {
@@ -45,8 +48,8 @@ int CourseSchedule::checkDates(Semester sem, Date sDate, Date eDate)
 	//  x      o  --3 -->startD
 	//  o      x  --4 -->endD
 	//  x      x  --2 -->both
-	sCnt = ((sem.getSemStartDate < sDate) ? 4 : 2);
-	eCnt = ((sem.getSemEndDate > eDate) ? 1 : 0);
+	sCnt = ((sem.getSemStartDate() < sDate) ? 4 : 2);
+	eCnt = ((sem.getSemEndDate() > eDate) ? 1 : 0);
 
 	return sCnt + eCnt;
 }
@@ -56,16 +59,14 @@ void CourseSchedule::addCourse(Course& cs, Semester sem, Date sDate, Date eDate)
 	//allow adding a course only when the dates are within the semester duration
 	if (checkDates(sem, sDate, eDate) == 5)
 	{
-		// but it says we have to use a memberwise function
-		*(Courses + numCourses) = cs;
-		// and this should work
+		// I think we need to call cinput such like cin >> cs[number];
 	}
-	numCourses++;
 }
 
 void CourseSchedule::removeCourse(Course* cs)
 {
 	int sel = maxSize + 1; //initialize so that it doesn't accidentally delete unintended course 
+	int cnt = sel - 1;
 
 	//prompt the user input 
 	cout << "Enter the order of the course that you would like to delete. " << endl; //It's kinda crude but it's a simplest way that I can think of.
@@ -77,16 +78,14 @@ void CourseSchedule::removeCourse(Course* cs)
 		cin >> sel;
 	}
 
-	int cnt = sel - 1;
-
 	// call remove function in Course class
 	// I don't know if it will delete only one element or not -- we need to check 
-	cs[cnt].remove(cs);
+	cs[sel].remove(cs);
 
 	//move all the other information of elements one to left 
-	for (int i = cnt; i < maxSize; i++)
+	for (int i = sel; i < maxSize; i++)
 	{
-		cs[cnt].replace(cs, cnt+1);				// since we are replacing the value of cnt to that of cnt+1 so I changed it.
+		cs[sel].replace(cs, sel);
 	}
 
 	// we should search how to remove the element of the arry that is already declared.
