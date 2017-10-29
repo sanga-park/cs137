@@ -33,8 +33,8 @@ int main()
 	cin >> maxNum;
 
 	Semester sem(semesterName, startDate, endDate);
-	CourseSchedule cou(name, sem, maxNum); // fixed the second string input to semester instance.
-
+	CourseSchedule cou(name, semesterName, maxNum); // still has a problem derieved from courseschedule cpp file.
+	
 	do
 	{
 		FirstScene(sem);
@@ -78,7 +78,7 @@ int main()
 		else if (sel == '3')
 		{
 			cout << "Your class schedule:" << endl;
-			//			cout << cou << endl;  uncommend if cou works.
+//			cout << cou << endl;  uncommend if cou works.
 		}
 		else if (sel == 'q' || sel == 'Q')
 		{
@@ -91,12 +91,11 @@ int main()
 			cin >> sel;
 		}
 	} while (sel != 'q' && sel != 'Q');
-
 }
 
 void FirstScene(Semester sem)
 {
-	cout << "COURSE ENTRY MENU FOR: " << setw(11) << sem.getSemesterName() << " (" << sem.getSemStartDate() << "-" << sem.getSemEndDate() << ")" << endl;
+	cout << "COURSE ENTRY MENU FOR: " << setw(11) << sem.getSemesterName << " (" << sem.getSemStartDate << "-" << sem.getSemEndDate << ")" << endl;
 	cout << "----------------------------------------------------------------" << endl;
 	cout << "1) Enter a new course" << endl;
 	cout << "2) Remove a course" << endl;
