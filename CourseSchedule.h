@@ -16,7 +16,7 @@ private:
 	int maxSize;
 	Course* Courses;
 	Course list; //test
-	//course(string, string, string, double, Date, Date, Time, Time);
+				 //course(string, string, string, double, Date, Date, Time, Time);
 
 	string sname; // student name
 	Semester smester;
