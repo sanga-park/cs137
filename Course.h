@@ -33,8 +33,8 @@ class Course
 		Time getStartTime() const;
 		Time getEndTime() const;
 
-		void remove(Course*); //test
-		void replace(Course*, int); //test
+		void remove(Course*);
+		void replace(Course*, int); 
 
 		Course& setCourseNum(string&);
 		Course& setCourseName(string&);

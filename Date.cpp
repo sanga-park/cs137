@@ -9,11 +9,12 @@ Date::Date(int mn, int dy, int yr)
  setDate(mn, dy, yr);
 }
 
-//destructor
+//destructor may not be needed
+/*
 Date::~Date()
 {
 	cout << "The destructor for date class has been called." << endl;
-}
+} */
 
 // get/set functions - cascading allowed by *this 
 Date& Date::setDate(int mn, int dy, int yr)

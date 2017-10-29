@@ -1,17 +1,16 @@
 #include "CourseSchedule.h"
 
-int CourseSchedule::numCourses;
-
 CourseSchedule::CourseSchedule(string studentName, Semester semest, int num) : sname(studentName), smester(semest), maxSize(num)
 {
-	CourseSchedule::numCourses = 0;
+	numCourses = 0;
 	Courses = new Course[maxSize]; 
 }
 
 CourseSchedule::~CourseSchedule()
 {
-	//numCourses = 0;
-	//maxSize = 0;
+	numCourses = 0;
+	maxSize = 0;
+	cout << "\nDestructor for CourseSchedule has been called. " << endl;
 	delete[] Courses;
 }
 
@@ -27,7 +26,7 @@ Semester CourseSchedule::getSemester() const
 
 int CourseSchedule::getnumCourse() const
 {
-	return CourseSchedule::numCourses;
+	return numCourses;
 }
 
 void CourseSchedule::setStudentName(string sn)
@@ -48,30 +47,53 @@ int CourseSchedule::checkDates(Semester sem, Date sDate, Date eDate)
 	//  x      o  --3 -->startD
 	//  o      x  --4 -->endD
 	//  x      x  --2 -->both
-	sCnt = ((sem.getSemStartDate() < sDate) ? 4 : 2);
-	eCnt = ((sem.getSemEndDate() > eDate) ? 1 : 0);
+	sCnt = ((sem.getSemStartDate() <= sDate) ? 4 : 2);
+	eCnt = ((sem.getSemEndDate() >= eDate) ? 1 : 0);
 
 	return sCnt + eCnt;
 }
 
 void CourseSchedule::addCourse(Course& cou, Semester sem, Date sDate, Date eDate)
 {
-	//allow adding a course only when the dates are within the semester duration
-	if (checkDates(sem, sDate, eDate) == 5)
+	if (numCourses <= maxSize)
 	{
-		cou = Courses[CourseSchedule::numCourses];
-		CourseSchedule::numCourses++;
+		int status = checkDates(sem, sDate, eDate);
+
+		//allow adding a course only when the dates are within the semester duration
+		if (status == clear)
+		{
+			Courses[numCourses] = cou;
+			numCourses++;
+		}
+		else if (status == startD)
+		{
+			cout << "\nClass start date is over the semester duration " << endl;
+		}
+		else if (status == endD)
+		{
+			cout << "\nClass end date is over the semester duration " << endl;
+		}
+		else
+		{
+			cout << "\nBoth class start and end dates are over the semester duration" << endl;
+		}
+	}
+
+	else
+	{
+		cout << "Maximum number of classes exceeded! Please try again after deleting a course. " << endl;
 	}
 }
 
-void CourseSchedule::removeCourse(Course* cs)
+void CourseSchedule::removeCourse()
 {
 	int sel = maxSize + 1; //initialize so that it doesn't accidentally delete unintended course 
-	int cnt = sel - 1; //same as maxSize
+	int cnt = sel - 1; //index of the array 
 
 	//prompt the user input 
 	cout << "Enter the order number of the course that you would like to delete. " << endl;
 	cin >> sel;
+
 	//check validation 
 	while (sel >= maxSize || sel < 0)
 	{
@@ -80,19 +102,15 @@ void CourseSchedule::removeCourse(Course* cs)
 	}
 
 	// call remove function in Course class
-	// I don't know if it will delete only one element or not -- we need to check 
-	cs[sel].remove(cs);
+	Courses[cnt].remove(Courses);
 
-	//count 
-	CourseSchedule::numCourses--;
-
-	//move all the other information of elements one to left 
+	//move all the other elements one to left 
 	for (int i = sel; i < maxSize; i++)
 	{
-		cs[sel].replace(cs, sel);
+		Courses[cnt].replace(Courses, sel);
 	}
 
-	// we should search how to remove the element of the arry that is already declared.
+	numCourses--;
 }
 
 ostream &operator<<(ostream & output, const CourseSchedule & sched)
@@ -102,10 +120,10 @@ ostream &operator<<(ostream & output, const CourseSchedule & sched)
 		<< endl << "Number of Classes: " << sched.numCourses
 		<< "-----------------------------------------\n";
 
-	// course description imported from course.cpp ostream operator
+	// course description imported from Course.cpp ostream operator
 	for (int i = 0; i < sched.numCourses; i++)
 	{
-		output << sched.Courses[i] << "\n" << endl;
+		output << sched.Courses[i]<< endl;
 	}
 	return output;
 }

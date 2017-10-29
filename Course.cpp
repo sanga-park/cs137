@@ -8,12 +8,10 @@ Course::Course(string csNum, string csName, string mtDays, double unt, Date stDa
 {
 }
 
-//destructor
 Course::~Course()
 {
 	cout << "The destructor for course class has been called." << endl;
 }
-
 
 ///////////////////////////////////////////get functions
 string Course::getCourseNum() const
@@ -104,20 +102,18 @@ Course& Course::setEndTime(Time& enTime)
 	return *this;
 }
 
-
-
 //remove & replace function 
 void Course::remove(Course* cs)
 {
-	Course* defaultCourse = nullptr; //initialized
+	Course* defaultCourse = nullptr; //initialize
 	cs = defaultCourse;
-
 }
 
 void Course::replace(Course* cs, int sel)
 {
-	cs[sel - 1].courseNum = cs[sel].courseNum;
-	//and so on...
+	cs[sel - 1] = cs[sel];
+	// the instruction says don't use memberwise assignment 
+	// then should we assign by element individually?
 }
 
 void Course::operator= (const Course& right) //this will be copied to Courses
@@ -132,8 +128,6 @@ void Course::operator= (const Course& right) //this will be copied to Courses
 	endTime = right.endTime;
 }
 
-
-
 //////////////////////////////////////////// iostream operators
 ostream &operator << (ostream &output, const Course& course)//, const Date& date, const Time& time) //ohh!!
 {
@@ -147,12 +141,7 @@ ostream &operator << (ostream &output, const Course& course)//, const Date& date
 	return output;
 }
 
-
-
-
-
-
-/* DON'T NEED THIS PART, I'm just saving it in case and check if it still works (out of curiousity) 
+/* DON'T NEED THIS PART, I'm just saving it out of curiousity
 istream &operator >> (istream &input, Course& course)
 {
 	cout << "Course Info: ";

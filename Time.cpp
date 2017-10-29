@@ -5,7 +5,7 @@ using namespace std;
 
 void Time::convertToUniversal()
 {
-	if  (amorpm == "PM")
+	if  (amorpm == "PM" || amorpm == "pm")
 	{
 		hour += 12;
 	}
@@ -55,7 +55,7 @@ double Time::operator-(Time& classTime)
 ostream& operator<<(ostream& output, const Time& classTime)
 {
 	output << ((classTime.hour == 0 || classTime.hour == 12) ? 12 : classTime.hour % 12) << ":"
-		<< setfill('0') << setw(2) << classTime.minute << ":"
+		<< setfill('0') << setw(2) << classTime.minute << " "
 		<< setw(2) << ((classTime.hour) < 12 ? "AM" : "PM");
 	return output;
 }

@@ -7,10 +7,11 @@ Semester::Semester(string semName, Date stDate, Date enDate) : semesterName(semN
 {
 }
 
+/*
 Semester::~Semester()
 {
 	cout << "The destructor for semester class has been called." << endl;
-}
+}*/
 
 Semester& Semester::setSemesterName(string& semName)
 {

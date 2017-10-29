@@ -23,7 +23,7 @@ class Date
 
         public:
                Date(int = 1, int = 1, int = 2017);
-               ~Date();
+               //~Date();
 			   //Date(const Date&); //copy constructor -> memberwise assignment 
 			   Date& setDate(int, int, int);
 
