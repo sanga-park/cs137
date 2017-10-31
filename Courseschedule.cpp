@@ -101,24 +101,32 @@ void CourseSchedule::removeCourse()
 	cout << "Enter the order number of the course that you would like to delete. " << endl;
 	cin >> sel;
 
-	//check validation 
-	while (sel >= maxSize || sel < 0)
+	if (numCourses > 0)
 	{
-		cout << "Invalid input! Please enter the proper order number: " << endl;
-		cin >> sel;
+		//check validation 
+		while (sel >= maxSize || sel < 0)
+		{
+			cout << "Invalid input! Please enter the proper order number: " << endl;
+			cin >> sel;
+		}
+
+		// call remove function in Course class
+		Courses[cnt].remove(Courses);
+
+		//move all the other elements one to left 
+		for (int i = sel; i < maxSize; i++)
+		{
+			Courses[cnt].replace(Courses, sel);
+		}
+		cout << "\nThe class has successfully been removed from your schedule!" << endl;
+
+		numCourses--;
+	}
+	else
+	{
+		cout << "The class schedule is empty. " << endl;
 	}
 
-	// call remove function in Course class
-	Courses[cnt].remove(Courses);
-
-	//move all the other elements one to left 
-	for (int i = sel; i < maxSize; i++)
-	{
-		Courses[cnt].replace(Courses, sel);
-	}
-	cout << "\nThe class has successfully been removed from your schedule!" << endl;
-
-	numCourses--;
 }
 
 ostream &operator<<(ostream & output, const CourseSchedule & sched)

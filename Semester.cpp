@@ -59,9 +59,9 @@ istream &operator>>(istream& input, Semester& sem)
 	//Fall 2017 (mm/dd/yyyy-mm/dd/yyyy) format
 	getline(input, sem.semesterName); // takes semester name (string)
 	input.ignore(); // ignore enter
-	input >> sem.semStartDate;
-	input.ignore(); // ignore bar (-)
-	input >> sem.semEndDate;
+	input >> setw(2) >> sem.semStartDate;
+	input.ignore(); // ignore bar/enter
+	input >> setw(2) >> sem.semEndDate;
 	input.ignore();
 
 	return input;

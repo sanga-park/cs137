@@ -161,6 +161,6 @@ ostream &operator << (ostream &output, const Course& course)
 		<< "Course Dates: " << course.startDate << " - " << course.endDate << endl
 		<< "Meeting Days: " << course.meetDays << endl
 		<< "Meeting Time: " << course.startTime << " - " << course.endTime << endl
-		<< "Daily Duration: " << course.getEndTime() - course.getStartTime() << endl;
+		<< "Daily Duration: " << course.getEndTime() - course.getStartTime() << "hr" << endl;
 	return output;
 }
