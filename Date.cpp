@@ -1,3 +1,8 @@
+/*
+CS 137 - Midterm Project 2017
+Team EECS
+*/
+
 #include <iostream>
 #include <iomanip>
 using namespace std;
@@ -6,17 +11,12 @@ using namespace std;
 //constructor validates month and calls utility function to validate day
 Date::Date(int mn, int dy, int yr)
 {
- setDate(mn, dy, yr);
+	setDate(mn, dy, yr);
 }
 
-//destructor may not be needed
-/*
-Date::~Date()
-{
-	cout << "The destructor for date class has been called." << endl;
-} */
-
-// get/set functions - cascading allowed by *this 
+////////////////////////////////////////////////////////////////
+/////////////////// GET SET FUNCTIONS //////////////////////////
+////////////////////////////////////////////////////////////////
 Date& Date::setDate(int mn, int dy, int yr)
 {
 	setMonth(mn);
@@ -61,28 +61,30 @@ int Date::getYear() const
 //PRIVATE COST UTILITY FUNCTION
 int Date::checkDay(int testDay) const
 {
-    static const int daysPerMonth[13] = {0,31,28,31,30,31,30,31,31,30,31,30,31};
-    
-    if(testDay > 0 && testDay <= daysPerMonth[month])
-    {
-     return testDay;
-    }
-    
-    //determine whether testDay is valid for a specific month
-    if(month == 2 && testDay == 29 && (year  % 400 == 0 || (year % 4  == 0 && year % 100 != 0)))
-    {
-      return testDay;
-    }
-    
-    cout << "Invalid Day " << testDay << " was set to 1" << endl;
-    return 1;  //keep data in valid state
+	static const int daysPerMonth[13] = { 0,31,28,31,30,31,30,31,31,30,31,30,31 };
+
+	if (testDay > 0 && testDay <= daysPerMonth[month])
+	{
+		return testDay;
+	}
+
+	//determine whether testDay is valid for a specific month
+	if (month == 2 && testDay == 29 && (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0)))
+	{
+		return testDay;
+	}
+
+	cout << "Invalid Day " << testDay << " was set to 1" << endl;
+	return 1;  //keep data in valid state
 }
 
-// iostream operator
+////////////////////////////////////////////////////////////////
+//////////////////////// OPERATORS /////////////////////////////
+//////////////////////////////////////////////////////////////// 
 ostream &operator << (ostream &output, const Date &date)
 {
-	output << setfill('0') << setw(2) << date.month << "/" << setw(2) << date.day  << "/" << setw(2) << date.year;
-		return output;
+	output << setfill('0') << setw(2) << date.month << "/" << setw(2) << date.day << "/" << setw(2) << date.year;
+	return output;
 }
 
 istream &operator >> (istream &input, Date &date)
@@ -95,7 +97,7 @@ istream &operator >> (istream &input, Date &date)
 	input >> setw(2) >> date.day;
 	input.ignore(); // skip /
 	input >> setw(4) >> date.year;
-		return input;
+	return input;
 }
 
 bool Date::operator > (const Date &right) const
@@ -103,6 +105,7 @@ bool Date::operator > (const Date &right) const
 	bool status = false;
 
 	//compare year first -> only if the year is the same, then check the month -> and same for the day 
+	//could've done with switch 
 	if (year > right.year)
 	{
 		status = true;
@@ -124,7 +127,7 @@ bool Date::operator > (const Date &right) const
 	return status;
 }
 
-void Date::operator = (const Date &right) //wouldn't be const
+void Date::operator = (const Date &right)
 {
 	month = right.month;
 	day = right.day;

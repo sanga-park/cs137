@@ -1,10 +1,15 @@
+/*
+CS 137 - Midterm Project 2017
+Team EECS
+*/
+
 #include <iostream>
 #include <iomanip>
 #include "Course.h"
 using namespace std;
 
 Course::Course(string csNum, string csName, string mtDays, double unt, Date stDate, Date enDate, Time stTime, Time enTime)
-	  :courseNum(csNum), courseName(csName), meetDays(mtDays), unit(unt), startDate(stDate), endDate(enDate), startTime(stTime), endTime(enTime)
+	:courseNum(csNum), courseName(csName), meetDays(mtDays), unit(unt), startDate(stDate), endDate(enDate), startTime(stTime), endTime(enTime)
 {
 }
 
@@ -13,7 +18,9 @@ Course::~Course()
 	cout << "The destructor for course class has been called." << endl;
 }
 
-///////////////////////////////////////////get functions
+////////////////////////////////////////////////////////////////
+/////////////////// GET SET FUNCTIONS //////////////////////////
+////////////////////////////////////////////////////////////////
 string Course::getCourseNum() const
 {
 	return courseNum;
@@ -54,7 +61,6 @@ Time Course::getEndTime() const
 	return endTime;
 }
 
-///////////////////////////////////////////set functions
 Course& Course::setCourseNum(string& csNum)
 {
 	courseNum = (csNum != "" ? csNum : "Course Number");
@@ -69,6 +75,10 @@ Course& Course::setCourseName(string& csName)
 
 Course& Course::setMeetDays(string& meets)
 {
+	for (int i = 0; i < meetDays.length() ; i++)
+	{
+		toupper(meetDays[i]);
+	}
 	meetDays = (meets != "" ? meets : "MTWTF");
 	return *this;
 }
@@ -102,7 +112,9 @@ Course& Course::setEndTime(Time& enTime)
 	return *this;
 }
 
-//remove & replace function 
+////////////////////////////////////////////////////////////////
+////////////// COURSE REMOVE & REPLACE FUNCTION  ///////////////
+//////////////////////////////////////////////////////////////// 
 void Course::remove(Course* cs)
 {
 	Course* defaultCourse = nullptr; //initialize
@@ -111,12 +123,26 @@ void Course::remove(Course* cs)
 
 void Course::replace(Course* cs, int sel)
 {
-	cs[sel - 1] = cs[sel];
-	// the instruction says don't use memberwise assignment 
-	// then should we assign by element individually?
+	// move every variable(information) in one element to one to the left in the array 
+	// Since the memberwise assignment for pointer variables are prohibited
+	// we assigned each variable individually.
+
+	// cs[sel - 1] = cs[sel];
+	cs[sel - 1].courseNum = cs[sel].courseNum;
+	cs[sel - 1].courseName = cs[sel].courseName;
+	cs[sel - 1].meetDays = cs[sel].meetDays;
+	cs[sel - 1].unit = cs[sel].unit;
+	cs[sel - 1].startDate = cs[sel].startDate;
+	cs[sel - 1].endDate = cs[sel].endDate;
+	cs[sel - 1].startTime = cs[sel].startTime;
+	cs[sel - 1].endTime = cs[sel].endTime;
 }
 
-void Course::operator= (const Course& right) //this will be copied to Courses
+////////////////////////////////////////////////////////////////
+//////////////////////// OPERATORS /////////////////////////////
+//////////////////////////////////////////////////////////////// 
+
+void Course::operator= (const Course& right)
 {
 	courseNum = right.courseNum;
 	courseName = right.courseName;
@@ -128,37 +154,13 @@ void Course::operator= (const Course& right) //this will be copied to Courses
 	endTime = right.endTime;
 }
 
-//////////////////////////////////////////// iostream operators
-ostream &operator << (ostream &output, const Course& course)//, const Date& date, const Time& time) //ohh!!
+ostream &operator << (ostream &output, const Course& course)
 {
 	output << "Course Info: " << course.courseNum << " -- " << course.courseName << endl
-		<< "Number of Units: " << setprecision(2) <<setfill('0') << course.unit << endl //how to make it work in 0.00 format
-		<< "Course Dates: " << course.startDate << " - " << course.endDate << endl 
+		<< "Number of Units: " << fixed << setprecision(2) << setfill('0') << course.unit << endl 
+		<< "Course Dates: " << course.startDate << " - " << course.endDate << endl
 		<< "Meeting Days: " << course.meetDays << endl
-		<< "Meeting Time: " << course.startTime << " - " << course.endTime << endl 
-		// to use Time - operator, the variables shouldn't be private -- reason why using get functions only in here. 
+		<< "Meeting Time: " << course.startTime << " - " << course.endTime << endl
 		<< "Daily Duration: " << course.getEndTime() - course.getStartTime() << endl;
 	return output;
 }
-
-/* DON'T NEED THIS PART, I'm just saving it out of curiousity
-istream &operator >> (istream &input, Course& course)
-{
-	cout << "Course Info: ";
-	input >> course.courseNum;
-	input.ignore(); // ignore a space
-	cout << "# of Units: ";
-	input >> course.unit;
-	input.ignore();
-	cout << "Course Dates in mm/dd/yyyy-mm/dd/yyyy format:";
-	input >> course.startDate;
-	input.ignore(); // ignore a bar
-	input >> course.getEndDate;
-	input.ignore();
-	cout << "Meeting Days: ";
-	input >> course.meetDays;
-	input.ignore();
-	cout << "Meeting Times: ";
-
-	return input;
-}*/

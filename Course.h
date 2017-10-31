@@ -1,3 +1,8 @@
+/*
+CS 137 - Midterm Project 2017
+Team EECS
+*/
+
 #ifndef COURSE_H
 #define COURSE_H
 
@@ -9,7 +14,6 @@ using namespace std;
 class Course
 {
 	friend ostream &operator<<(ostream &, const Course &);
-
 	private:
 		string courseNum;
 		string courseName;
@@ -22,7 +26,7 @@ class Course
 
 	public:
 		//by adding member initializers we don't need the default constructor 
-		Course(string ="", string ="", string ="", double =0.0, Date =(0,0,0), Date =(0,0,0), Time =(0,0,0), Time=(0,0,0));
+		Course(string = "", string = "", string = "", double = 0.0, Date = (0, 0, 0), Date = (0, 0, 0), Time = (0, 0, 0), Time = (0, 0, 0));
 		~Course();
 		string getCourseNum() const;
 		string getCourseName() const;
@@ -33,8 +37,9 @@ class Course
 		Time getStartTime() const;
 		Time getEndTime() const;
 
+		//for manipulating courses in CourseSchedule class
 		void remove(Course*);
-		void replace(Course*, int); 
+		void replace(Course*, int);
 
 		Course& setCourseNum(string&);
 		Course& setCourseName(string&);

@@ -1,3 +1,8 @@
+/*
+CS 137 - Midterm Project 2017
+Team EECS
+*/
+
 #include <iostream>
 #include <iomanip>
 using namespace std;
@@ -5,7 +10,7 @@ using namespace std;
 
 void Time::convertToUniversal()
 {
-	if  (amorpm == "PM" || amorpm == "pm")
+	if (amorpm == "PM" || amorpm == "pm")
 	{
 		hour += 12;
 	}
@@ -54,21 +59,21 @@ double Time::operator-(Time& classTime)
 
 ostream& operator<<(ostream& output, const Time& classTime)
 {
-	output << ((classTime.hour == 0 || classTime.hour == 12) ? 12 : classTime.hour % 12) << ":"
+	output << setfill('0') << setw(2) << classTime.hour << ":" << setfill('0') << setw(2) << classTime.minute << " " << classTime.amorpm ;
+	/*output << ((classTime.hour == 0 || classTime.hour == 12) ? 12 : classTime.hour % 12) << ":"
 		<< setfill('0') << setw(2) << classTime.minute << " "
-		<< setw(2) << ((classTime.hour) < 12 ? "AM" : "PM");
+		<< setw(2) << ((classTime.hour) < 12 ? "AM" : "PM");*/
 	return output;
 }
 
 istream& operator>>(istream& input, Time& classTime)
 {
-	input >> classTime.hour;
+	input >> setw(2) >> classTime.hour;
 	input.ignore();
-	input >> classTime.minute;
+	input >> setw(2) >> classTime.minute;
 	input.ignore();
-	input >> classTime.amorpm;
+	input >> setw(2) >> classTime.amorpm;
 	return input;
-	// default times?
 }
 
 Time::Time(int hour, int minute)
@@ -80,38 +85,43 @@ Time& Time::setTime(int hour, int minute)
 {
 	setHour(hour);
 	setMinute(minute);
-	return* this;
+	return*this;
 }
 
 Time& Time::setHour(int h)
 {
-	hour = (h >= 0 && h < 24) ? h : 0;  
-	return* this;
+	hour = (h >= 0 && h < 24) ? h : 0;
+	return*this;
 }
 
 Time& Time::setMinute(int m)
 {
-	minute = (m >= 0 && m < 24) ? m : 0;  
-	return* this;
+	minute = (m >= 0 && m < 24) ? m : 0;
+	return*this;
 }
 
-int Time::getHour() const 
+int Time::getHour() const
 {
 	return hour;
 }
 
-int Time::getMinute() const 
+int Time::getMinute() const
 {
 	return minute;
 }
 
-void Time::printUniversal()const 
+string Time::getAmorpm() const
+{
+	return amorpm;
+}
+
+void Time::printUniversal()const
 {
 	cout << setfill('0') << setw(2) << hour << ":"
 		<< setw(2) << minute << ":" << endl;
 }
 
-void Time::printStandard()const 
+void Time::printStandard()const
 {
 	cout << ((hour == 0 || hour == 12) ? 12 : hour % 12) << ":"
 		<< setfill('0') << setw(2) << minute << ":"

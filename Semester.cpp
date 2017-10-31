@@ -1,3 +1,8 @@
+/*
+CS 137 - Midterm Project 2017
+Team EECS
+*/
+
 #include <iostream>
 #include <iomanip>
 #include "Semester.h"
@@ -6,12 +11,6 @@ using namespace std;
 Semester::Semester(string semName, Date stDate, Date enDate) : semesterName(semName), semStartDate(stDate), semEndDate(enDate)
 {
 }
-
-/*
-Semester::~Semester()
-{
-	cout << "The destructor for semester class has been called." << endl;
-}*/
 
 Semester& Semester::setSemesterName(string& semName)
 {
@@ -57,13 +56,13 @@ ostream &operator<<(ostream& output, const Semester &sem)
 
 istream &operator>>(istream& input, Semester& sem)
 {
-	cout << "Please enter the semester name and press enter;\n" 
-		 << "then input the semester duration in (mm/dd/yyyy-mm/dd/yyyy) format: \n";
-	getline(input, sem.semesterName); // takes a string (containing spaces) 
+	//Fall 2017 (mm/dd/yyyy-mm/dd/yyyy) format
+	getline(input, sem.semesterName); // takes semester name (string)
 	input.ignore(); // ignore enter
 	input >> sem.semStartDate;
 	input.ignore(); // ignore bar (-)
 	input >> sem.semEndDate;
+	input.ignore();
 
 	return input;
 }

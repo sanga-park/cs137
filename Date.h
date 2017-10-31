@@ -1,3 +1,8 @@
+/*
+CS 137 - Midterm Project 2017
+Team EECS
+*/
+
 #ifndef DATE_H
 #define DATE_H
 #include <iostream>
@@ -23,11 +28,8 @@ class Date
 
         public:
                Date(int = 1, int = 1, int = 2017);
-               //~Date();
-			   //Date(const Date&); //copy constructor -> memberwise assignment 
 			   Date& setDate(int, int, int);
 
-			   //add get/set member variable functions
 			   Date& setMonth(int);
 			   Date& setDay(int);
 			   Date& setYear(int);
